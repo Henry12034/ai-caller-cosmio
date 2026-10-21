@@ -1,0 +1,19 @@
+# Segreti e dati personali: non vanno mai su GitHub
+.env
+ACCESSO.md
+agente-v2.json
+registrazioni/
+
+# Note interne di Cosmio (server, numero, prove con persone vere)
+NOTE-INTERNE.md
+COPIONE-VIDEO.md
+
+# Prove e campioni audio (si rigenerano con gli script in prove/)
+prove/out/
+prove/audio-cliente/
+campioni/
+voci-receptionist/
+voci-receptionist.zip
+
+node_modules/
+*.log

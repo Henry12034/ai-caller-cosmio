@@ -1,0 +1,19 @@
+{
+  "name": "ai-caller-officina",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Receptionist AI al telefono: risponde, prende appuntamenti e parla italiano come una persona. Versione 1 velocissima (OpenAI Realtime) e versione 2 con voce italiana realistica (ElevenLabs + Claude).",
+  "type": "module",
+  "scripts": {
+    "start": "node src/server.mjs",
+    "prepara-agente-v2": "node src/prepara-agente-v2.mjs",
+    "prova:v1": "node prove/finto-twilio.mjs \"http://127.0.0.1:5050/twilio/locale/voce?v=1\" prova-v1",
+    "prova:v2": "node prove/finto-elevenlabs.mjs prova-v2"
+  },
+  "dependencies": {
+    "ws": "^8.18.3"
+  },
+  "engines": {
+    "node": ">=20.12"
+  }
+}
