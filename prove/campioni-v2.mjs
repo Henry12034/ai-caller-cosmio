@@ -1,18 +1,19 @@
 // Campioni delle voci italiane ElevenLabs (versione 2) in qualità telefono, per sceglierle a orecchio.
-// Uso: node prove/campioni-v2.mjs  → file in campioni/v2/
+// Uso: node prove/campioni-v2.mjs [mature | carattere]  → file in campioni/v2/
 import { mkdirSync, writeFileSync, existsSync, unlinkSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { join } from 'node:path';
 import { CONFIG, RADICE } from '../src/config.mjs';
-import { VOCI as TUTTE, VOCI_MATURE } from './voci-v2.mjs';
+import { VOCI as TUTTE, VOCI_MATURE, VOCI_CARATTERE } from './voci-v2.mjs';
 
 const cartella = join(RADICE, 'campioni', 'v2');
 mkdirSync(cartella, { recursive: true });
 
 const testo = (genere) => `Officina Marchetti, buongiorno! Sono ${genere === 'uomo' ? 'Luca' : 'Giulia'}, mi dica. ... Eh, allora guardi, siamo pienissimi... l'unico giorno che ho è martedì: alle nove, alle undici e mezza, o alle due. ... Tagliando, pastiglie, spia del motore, clima e pure i liquidi? [laughs] Ah, quindi praticamente una macchina nuova!`;
 
-const VOCI = process.argv[2] === 'mature' ? VOCI_MATURE : TUTTE;
-const solo = process.argv[2] === 'mature' ? process.argv[3] : process.argv[2];
+const LISTE = { mature: VOCI_MATURE, carattere: VOCI_CARATTERE };
+const VOCI = LISTE[process.argv[2]] || TUTTE;
+const solo = LISTE[process.argv[2]] ? process.argv[3] : process.argv[2];
 for (const [genere, nome, id] of VOCI) {
   if (solo && !nome.toLowerCase().startsWith(solo.toLowerCase())) continue;
   const mp3 = join(cartella, `${nome}.mp3`);

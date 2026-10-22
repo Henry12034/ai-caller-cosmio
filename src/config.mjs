@@ -33,6 +33,9 @@ export const CONFIG = {
   // Versione 2: voce ElevenLabs, massimo realismo
   v2: {
     voce: process.env.V2_VOCE || '', // voice_id ElevenLabs (voce italiana madrelingua)
+    personaggio: process.env.V2_PERSONAGGIO || 'standard', // 'standard' | 'napoletano'
+    nome: process.env.V2_NOME || '', // vuoto = NOME_RECEPTIONIST (Luca)
+    paroleExtra: (process.env.V2_PAROLE || '').split(',').map((p) => p.trim()).filter(Boolean),
     modelloVoce: process.env.V2_MODELLO_VOCE || 'eleven_v4_turbo',
     // il più naturale in italiano a parità di prontezza (confronto del 21/10: README)
     llm: process.env.V2_LLM || 'claude-haiku-5-5',

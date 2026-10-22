@@ -9,6 +9,8 @@ import { eleven, FILE_AGENTE } from './v2-elevenlabs.mjs';
 
 const stato = existsSync(FILE_AGENTE) ? JSON.parse(readFileSync(FILE_AGENTE, 'utf8')) : {};
 const v = CONFIG.v2;
+// chi risponde nella versione 2: Luca in italiano neutro, oppure V2_PERSONAGGIO=napoletano (con V2_NOME)
+const personaggio = { personaggio: v.personaggio, ...(v.nome ? { nome: v.nome } : {}) };
 if (!CONFIG.elevenKey) throw new Error('Manca ELEVENLABS_API_KEY nel file .env');
 if (!v.voce) throw new Error('Manca V2_VOCE (voice_id della voce italiana) nel file .env');
 if (!CONFIG.urlPubblico || !process.env.SEGRETO) throw new Error('Servono URL_PUBBLICO e SEGRETO (gli stessi del server online)');
@@ -53,9 +55,9 @@ const agente = {
   conversation_config: {
     agent: {
       language: 'it',
-      first_message: saluto(),
+      first_message: saluto(personaggio),
       prompt: {
-        prompt: istruzioni({ perTts: true, oggi: '{{oggi}}', slot: '{{giorno_libero}}', fine: 'end_call' }),
+        prompt: istruzioni({ perTts: true, oggi: '{{oggi}}', slot: '{{giorno_libero}}', fine: 'end_call', ...personaggio }),
         llm: v.llm,
         temperature: 0.7,
         // niente "ragionamento" prima di rispondere: al telefono conta la prontezza.
@@ -89,7 +91,8 @@ const agente = {
     asr: {
       provider: v.asr,
       user_input_audio_format: 'ulaw_8000',
-      keywords: ['tagliando', 'pastiglie', 'libretto', 'Marchetti', 'Giulia', 'climatizzatore'],
+      // V2_PAROLE: parole in più da riconoscere bene, separate da virgola (es. il nome di chi chiama nella demo)
+      keywords: ['tagliando', 'pastiglie', 'libretto', 'Marchetti', 'Giulia', 'climatizzatore', ...v.paroleExtra],
     },
     // spelling_patience 'off': niente attesa in più quando il cliente dice nomi e numeri
     turn: {
@@ -101,7 +104,7 @@ const agente = {
       soft_timeout_config: {
         timeout_seconds: v.riempitivoSecondi,
         message: 'Mmh, allora...',
-        additional_soft_timeout_messages: ['Eh, vediamo...', 'Sì, sì...', 'Allora, guardi...'],
+        additional_soft_timeout_messages: ['Eh, vediamo...', 'Sì, sì...', v.personaggio === 'napoletano' ? 'Allora, guardate...' : 'Allora, guardi...'],
         randomize_fillers: true,
         use_llm_generated_message: false,
         max_soft_timeouts_per_generation: 1,

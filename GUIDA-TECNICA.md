@@ -64,6 +64,20 @@ Le istruzioni sono scritte in italiano parlato apposta: esempi sciolti e regole 
 
 Dopo una modifica riavvia il server (versione 1) e rilancia `prepara-agente-v2.mjs` (versione 2).
 
+### Un personaggio con carattere: il napoletano verace
+
+Con `V2_PERSONAGGIO=napoletano` e `V2_NOME=Gennaro` la versione 2 diventa un napoletano di quelli veri:
+- saluta con «Uè, buongiorno! Officina Marchetti, so' Gennaro, mi dica»;
+- dà del voi;
+- mette due o tre parole napoletane in ogni risposta, fino al «Stateve buono!» finale.
+
+Vale per ogni risposta perché è il testo a tenere vivo l'accento: con Eleven v4 Turbo una voce napoletana che legge italiano neutro conserva il timbro, ma l'accento si attenua.
+
+La voce adatta di solito non c'è nella libreria (le voci napoletane sono poche e leggere): si crea con Voice Design.
+- `node prove/disegna-voce.mjs <nome> "<descrizione in inglese>"` crea tre proposte da una descrizione, per esempio un meccanico sessantenne della periferia di Napoli con la voce da fumatore. Le salva tra le voci dell'account e le fa parlare con v4 Turbo in qualità telefono.
+- `node prove/campioni-napoletani.mjs` fa dire alle voci la scena con la parlata napoletana.
+- `node prove/confronto-accento.mjs` mette a confronto v4 Turbo e `eleven_v3_conversational` sulla voce in `V2_VOCE`.
+
 ## Prove senza telefono
 
 | Comando | Cosa fa |

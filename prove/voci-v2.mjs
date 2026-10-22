@@ -13,6 +13,18 @@ export const VOCI = [
   ['donna', 'Marta-toscana', 'ZX5x7KzQ9elPznG4bv3T'],
 ];
 
+// Voci con accento regionale marcato o da "personaggio", meno da speaker professionista
+export const VOCI_CARATTERE = [
+  ['uomo', 'Eddy-napoletano', '9EBC4nR8Ez9R9MFRcOx1'],
+  ['uomo', 'Raf-napoletano', '6HCIm4JAL5AF0sSi7qZd'],
+  ['uomo', 'Salvo-siciliano-comico', 'mJSddcekWUkB3BOnjPFb'],
+  ['uomo', 'Antonio-Samura-personaggio', 'j22UF9K5KYGQ9ZWqYCA3'],
+  ['uomo', 'Danilo-siciliano', '4YsN90HrCPrOCmBglwMA'],
+  ['uomo', 'Daniele-calabrese', 'Kx2cUK0eKJ8aFAcwDYLd'],
+  ['donna', 'Rita-napoletana', 'jlhiuC3oLEP3JDAx1ECk'],
+  ['donna', 'Maruzzeja-calabrese', 'zzBa3JLSQKDusYxegeHf'],
+];
+
 // Voci maschili più mature, stessa naturalezza di Vittorio (richieste dopo il primo ascolto)
 export const VOCI_MATURE = [
   ['uomo', 'Ambrogio-milanese-40', 'lnAjdaCaPjsPk6y5w9EV'],
