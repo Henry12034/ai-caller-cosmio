@@ -1,5 +1,10 @@
 <p align="center">
-  <img src="assets/cosmio-logo.jpeg" alt="Cosmio" width="440">
+  <a href="https://cosmio.it">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/cosmio-logo-bianco.svg">
+      <img src="assets/cosmio-logo-scuro.svg" alt="Cosmio" width="420">
+    </picture>
+  </a>
 </p>
 
 <h1 align="center">Il receptionist AI che risponde al telefono al posto tuo</h1>
